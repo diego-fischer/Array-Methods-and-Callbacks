@@ -40,6 +40,8 @@ const getFinals = (fifaData) => {
   return objArrTeamsFinals;
 };
 
+// console.log(getFinals(fifaData));
+
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher-order function called getYears to do the following: 
 1. Receive an array
@@ -102,9 +104,31 @@ const getWinnersByYear = (fifaData, getYears, getWinners) => {
    Example of invocation: getAverageGoals(getFinals(fifaData));
   */
 
-function getAverageGoals(/* code here */) {
-  /* code here */
-}
+const getAverageGoals = (getFinals) => {
+  const matchesDataArr = getFinals;
+  //   console.log(matchesDataArr);
+  const totalMatches = matchesDataArr.length;
+
+  const homeTeamArr = matchesDataArr.map((el) => el["Home Team Goals"]);
+  const awayTeamArr = matchesDataArr.map((el) => el["Away Team Goals"]);
+  const sumHomeTeamArr = homeTeamArr.reduce((a, b) => a + b);
+  const sumAwayTeamArr = awayTeamArr.reduce((a, b) => a + b);
+
+  let totalGoalsAvg = (
+    (sumHomeTeamArr + sumAwayTeamArr) /
+    totalMatches
+  ).toFixed(2);
+
+  //   totalGoalsAvg = Math.round(totalGoalsAvg * 100) / 100;
+
+  //   console.log(totalMatches);
+  //   console.log(sumHomeTeamArr);
+  //   console.log(sumAwayTeamArr);
+
+  return totalGoalsAvg;
+};
+
+getAverageGoals(getFinals(fifaData));
 
 /// 🥅 STRETCH 🥅 ///
 
