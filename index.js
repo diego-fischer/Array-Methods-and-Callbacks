@@ -60,8 +60,8 @@ const getYears = (fifaData, getFinals) => {
   4. Returns the names of all winning countries in an array called `winners` */
 
 const getWinners = (fifaData, getFinals) => {
-  const finalStageMatches = getFinals(fifaData);
   const winners = [];
+  const finalStageMatches = getFinals(fifaData);
   finalStageMatches.forEach((el) =>
     el["Home Team Goals"] > el["Away Team Goals"]
       ? winners.push(el["Home Team Name"])
@@ -80,9 +80,17 @@ const getWinners = (fifaData, getFinals) => {
   hint: the strings returned need to exactly match the string in step 4.
    */
 
-function getWinnersByYear(/* code here */) {
-  /* code here */
-}
+const getWinnersByYear = (fifaData, getYears, getWinners) => {
+  const years = getYears(fifaData, getFinals);
+  const winners = getWinners(fifaData, getFinals);
+  const strings = [];
+  years.forEach((el, i) => {
+    strings.push(`In ${el}, ${winners[i]} won the world cup!`);
+  });
+  return strings;
+};
+
+// console.log(getWinnersByYear(fifaData, getYears, getWinners));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
   Use the higher order function getAverageGoals to do the following: 
