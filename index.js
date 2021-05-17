@@ -105,7 +105,7 @@ const getWinnersByYear = (fifaData, getYears, getWinners) => {
   */
 
 const getAverageGoals = (getFinals) => {
-  const matchesDataArr = getFinals;
+  const matchesDataArr = getFinals; // pq não posso passar os fifaData aqui?
   //   console.log(matchesDataArr);
   const totalMatches = matchesDataArr.length;
 
@@ -138,16 +138,38 @@ getAverageGoals(getFinals(fifaData));
   Hint: Investigate your data to find "team initials"!
   Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-  /* code here */
-}
+const getCountryWins = (fifaData, teamInitials) => {
+  const newArr = fifaData.filter((el) => {
+    if (
+      el["Home Team Initials"] == teamInitials ||
+      el["Away Team Initials"] == teamInitials
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  let count = 0;
+
+  newArr.forEach((el) => {
+    if (
+      (el["Home Team Initials"] == teamInitials &&
+        el["Home Team Goals"] > el["Away Team Goals"]) ||
+      (el["Away Team Initials"] == teamInitials &&
+        el["Away Team Goals"] > el["Home Team Goals"])
+    ) {
+      count++;
+    }
+  });
+
+  return count;
+};
+
+console.log(getCountryWins(fifaData, "ITA"));
 
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
   Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
-
-function getGoals(/* code here */) {
-  /* code here */
-}
 
 /* 💪💪💪💪💪 Stretch 3: 💪💪💪💪💪
   Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */
